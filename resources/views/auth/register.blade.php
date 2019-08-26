@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="shortcut icon" href="/image/favicon.ico">
-  <title>SCP Foundation | Log in</title>
+  <title>SCP Foundation | Register</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -30,7 +30,7 @@
 </head>
 <body class="hold-transition">
 <div class="login-box">
-  @if ($errors->any())
+    @if ($errors->any())
       <div class="alert alert-danger">
           <ul>
               @foreach ($errors->all() as $error)
@@ -39,46 +39,43 @@
           </ul>
       </div>
     @endif
-    @if (\Session::has('success'))
-    <div class="alert alert-success">
-        <ul>
-            <li>{!! \Session::get('success') !!}</li>
-        </ul>
-    </div>
-  @endif  
   <!-- /.login-logo -->
   <div class="login-box-body">
     <h4 class="login-box-msg">Welcome to</h4>
     <h1 class="login-box-msg">SCP Foundation</h1>
     <hr>
-    <h4><strong>Login</strong></h4>
+    <h4><strong>Register New Member</strong></h4>
     <br>
-    <form action="/postlogin" method="post">
+    <form action="/registersave" method="post">
     @csrf
-      <div class="form-group has-feedback">
+      <div class="form-group has-feedback {{$errors->has('name') ? 'has-error' : ''}}">
+        <input name="name" type="name" class="form-control" placeholder="Name" required>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback {{$errors->has('email') ? 'has-error' : ''}}">
         <input name="email" type="email" class="form-control" placeholder="Email" required>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
-      <div class="form-group has-feedback">
+      <div class="form-group has-feedback {{$errors->has('password') ? 'has-error' : ''}}">
         <input name="password" type="password" class="form-control" placeholder="Password" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
+      <div class="form-group has-feedback {{$errors->has('password') ? 'has-error' : ''}}">
+        <input name="password_confirmation" type="password" class="form-control" placeholder="Re-type Password" required>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+      <label for="file">Your Avatar :</label>
+        <input type="file" name="file" type="file" class="form-control" placeholder="avatar">
+      </div>
       <div class="row">
-        <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Remember Me
-            </label>
-          </div>
-        </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Submit</button>
         </div>
         <!-- /.col -->
       </div>
     </form>
-    <a href="/register" class="text-center">Register</a>
 
   </div>
   <!-- /.login-box-body -->

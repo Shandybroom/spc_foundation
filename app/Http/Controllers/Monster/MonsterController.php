@@ -32,10 +32,24 @@ class MonsterController extends Controller
 
     public function store(Request $request)
     {   
-        $file = $request->file('file');
-        $file_name = $file->getClientOriginalName();
-        $file->move('data_file',$file->getClientOriginalName());
+        if(!$request->file == null){
+            $file = $request->file('file');
+            $file_name = $file->getClientOriginalName();
+            $file->move('data_file',$file->getClientOriginalName());
+        }else{
+            $file_name = "not-found.jpg";
+        }
         
+        //Validasi inputan
+        $this->validate($request,[
+            'name' => 'required|min:2',
+            'alias' => 'required|min:2',
+            'code'=> 'required|min:7',
+            'class' => 'required|min:3',
+            'region' => 'required|min:3',
+            'description' => 'required|min:3'
+
+        ]);
         //simpan ke database
         $monster = new Scp_monster;
 

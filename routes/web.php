@@ -12,12 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('auth.login');
 });
 
 //LOGIN HERE
 Route::get('/login','AuthController@login')->name('login');
 Route::get('/logout','AuthController@logout');
+Route::get('/register','AuthController@register');
+Route::post('/registersave','AuthController@registersave');
 Route::post('/postlogin','AuthController@postlogin');
 
 //WHAT ARE YOU GOIN TO DO
